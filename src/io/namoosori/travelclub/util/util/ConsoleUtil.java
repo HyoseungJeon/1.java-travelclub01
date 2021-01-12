@@ -19,7 +19,7 @@ public class ConsoleUtil {
         this.narrator = narrator;
     }
 
-    public String getValuOf(String label){
+    public String getValueOf(String label){
 
         narrator.say(label + ": ");
         String inputStr = scanner.nextLine();

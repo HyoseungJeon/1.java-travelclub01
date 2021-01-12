@@ -1,8 +1,8 @@
-package io.namoosori.travelclub.step3.ui.menu;
+package io.namoosori.travelclub.step4.ui.menu;
 
 import io.namoosori.travelclub.step1.entity.TravelClub;
-import io.namoosori.travelclub.step3.logic.ClubCoordinator;
-import io.namoosori.travelclub.step3.ui.console.ClubConsole;
+import io.namoosori.travelclub.step4.logic.ClubCoordinator;
+import io.namoosori.travelclub.step4.ui.console.ClubConsole;
 import io.namoosori.travelclub.util.util.Narrator;
 import io.namoosori.travelclub.util.util.TalkingAt;
 
@@ -17,8 +17,8 @@ public class ClubMenu {
     private Scanner scanner;
     private Narrator narrator;
 
-    public ClubMenu(){
-
+    public ClubMenu() {
+        //
         ClubCoordinator clubCoordinator = new ClubCoordinator();
         this.memberMenu = new MemberMenu(clubCoordinator);
         this.clubConsole = new ClubConsole(clubCoordinator);
@@ -27,15 +27,16 @@ public class ClubMenu {
         this.narrator = new Narrator(this, TalkingAt.Left);
     }
 
-    public void show(){
-
+    public void show() {
+        //
         int inputNumber = 0;
 
-        while (true){
+        while (true) {
             displayMenu();
             inputNumber = selectMenu();
 
-            switch (inputNumber){
+            switch (inputNumber) {
+                //
                 case 1:
                     currentClub = clubConsole.register();
                     break;
@@ -60,29 +61,8 @@ public class ClubMenu {
         }
     }
 
-    private int selectMenu() {
-
-        System.out.print("Select: ");
-        int menuNumber = scanner.nextInt();
-
-        if(menuNumber >= 0 && menuNumber <= 5){
-            scanner.nextLine();
-            return menuNumber;
-        } else {
-            narrator.sayln("It's a invalid number --> " + menuNumber);
-            return -1;
-        }
-    }
-
-    private void exitProgram(){
-
-        narrator.sayln("Program exit. Bye...");
-        scanner.close();
-        System.exit(0);
-    }
-
-    private void displayMenu(){
-
+    private void displayMenu() {
+        //
         narrator.sayln("");
         narrator.sayln("..............................");
         narrator.sayln(" Club menu ");
@@ -98,4 +78,24 @@ public class ClubMenu {
         narrator.sayln("..............................");
     }
 
+    private int selectMenu() {
+        //
+        System.out.print("Select: ");
+        int menuNumber = scanner.nextInt();
+
+        if (menuNumber >= 0 && menuNumber <= 5) {
+            scanner.nextLine();
+            return menuNumber;
+        } else {
+            narrator.sayln("It's a invalid number --> " + menuNumber);
+            return -1;
+        }
+    }
+
+    private void exitProgram() {
+        //
+        narrator.sayln("Program exit. Bye...");
+        scanner.close();
+        System.exit(0);
+    }
 }

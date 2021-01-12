@@ -1,47 +1,41 @@
-package io.namoosori.travelclub.step3.ui.menu;
+package io.namoosori.travelclub.step4.ui.menu;
 
 import io.namoosori.travelclub.step1.entity.TravelClub;
-import io.namoosori.travelclub.step3.logic.ClubCoordinator;
-import io.namoosori.travelclub.step3.ui.console.MemberConsole;
+import io.namoosori.travelclub.step4.logic.ClubCoordinator;
+import io.namoosori.travelclub.step4.ui.console.MemberConsole;
 import io.namoosori.travelclub.util.util.Narrator;
 import io.namoosori.travelclub.util.util.TalkingAt;
 
 import java.util.Scanner;
 
 public class MemberMenu {
-
+    //
     private MemberConsole memberConsole;
 
     private Scanner scanner;
     private Narrator narrator;
 
-    public MemberMenu(ClubCoordinator clubCoordinator){
+    public MemberMenu(ClubCoordinator clubCoordinator) {
+        //
         this.memberConsole = new MemberConsole(clubCoordinator);
         this.scanner = new Scanner(System.in);
         this.narrator = new Narrator(this, TalkingAt.Left);
     }
 
-
     public void show(TravelClub currentClub) {
-
+        //
         int inputNumber = 0;
-        if(currentClub == null){
-
-            narrator.sayln("Club is not selected yet !!");
-            return;
-        }
 
         this.memberConsole.setCurrentClub(currentClub);
 
-        while (true){
-
+        while(true){
             displayMenu();
             inputNumber = selectMenu();
 
-            switch ( inputNumber){
-
+            switch (inputNumber) {
+                //
                 case 1:
-                    memberConsole.findAntotherClub();
+                    memberConsole.findAnotherClub();
                     break;
                 case 2:
                     memberConsole.add();
@@ -64,24 +58,11 @@ public class MemberMenu {
         }
     }
 
-    private int selectMenu() {
-
-        System.out.print("Select: ");
-        int menuNumber = scanner.nextInt();
-
-        if(menuNumber >= 0 && menuNumber <= 5){
-            scanner.nextLine();
-            return menuNumber;
-        }else {
-            narrator.sayln("It's a invalid number --> " + menuNumber);
-            return -1;
-        }
-    }
-
-    private void displayMenu(){
+    private void displayMenu() {
+        //
         narrator.sayln("");
         narrator.sayln("..............................");
-        if (memberConsole.hasCurrentclub()) {
+        if (memberConsole.hasCurrentClub()) {
             narrator.sayln(" Members menu for[" + memberConsole.requestCurrentClubName() + "]");
         } else {
             narrator.sayln(" Members menu [No club selected]");
@@ -95,5 +76,19 @@ public class MemberMenu {
         narrator.sayln("..............................");
         narrator.sayln(" 0. Previous");
         narrator.sayln("..............................");
+    }
+
+    private int selectMenu() {
+        //
+        System.out.print("Select: ");
+        int menuNumber = scanner.nextInt();
+
+        if (menuNumber >= 0 && menuNumber <= 5) {
+            scanner.nextLine();
+            return menuNumber;
+        } else {
+            narrator.sayln("It's a invalid number --> " + menuNumber);
+            return -1;
+        }
     }
 }

@@ -14,15 +14,15 @@ public class ClubConsole {
     }
 
     public void register(){
-        consoleUtil.getValuOf("\n You've select the club register menu [Enter to go back].");
+        consoleUtil.getValueOf("\n You've select the club register menu [Enter to go back].");
     }
     public void find(){
-        consoleUtil.getValuOf("\n You've select the club find menu [Enter to go back].");
+        consoleUtil.getValueOf("\n You've select the club find menu [Enter to go back].");
     }
     public void modify(){
-        consoleUtil.getValuOf("\n You've select the club modify menu [Enter to go back].");
+        consoleUtil.getValueOf("\n You've select the club modify menu [Enter to go back].");
     }
     public void remove(){
-        consoleUtil.getValuOf("\n You've select the club remove menu [Enter to go back].");
+        consoleUtil.getValueOf("\n You've select the club remove menu [Enter to go back].");
     }
 }
