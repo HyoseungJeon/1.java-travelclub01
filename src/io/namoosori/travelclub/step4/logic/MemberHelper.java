@@ -7,6 +7,7 @@ import io.namoosori.travelclub.util.exception.MemberDuplicationException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MemberHelper {
 
@@ -18,11 +19,12 @@ public class MemberHelper {
     }
 
     public boolean existByEmail(TravelClub club, String email){
-        for(ClubMember member : club.getMembers()){
+        /*for(ClubMember member : club.getMembers()){
             if(member.getEmail().equals(email))
                 return true;
         }
-        return true;
+        return true;*/
+        return club.getMembers().stream().anyMatch(member -> member.getEmail().equals(email));
     }
 
     public boolean hasMembers(TravelClub club){
@@ -42,16 +44,17 @@ public class MemberHelper {
     }
 
     public ClubMember find(TravelClub club, String email){
-        for(ClubMember member : club.getMembers()){
+        /*for(ClubMember member : club.getMembers()){
             if(member.getEmail().equals(email)){
                 return member;
             }
         }
-        return null;
+        return null;*/
+        return club.getMembers().stream().filter(member -> member.getEmail().equals(email)).findAny().orElse(null);
     }
 
     public void modify(TravelClub club, String memberEmail, ClubMember newClubMember){
-        List<ClubMember> clubMembers = new ArrayList<>();
+        /*List<ClubMember> clubMembers = new ArrayList<>();
 
         for(ClubMember clubMember : club.getMembers()){
             ClubMember targetMember = clubMember;
@@ -61,15 +64,15 @@ public class MemberHelper {
             }
 
             clubMembers.add(targetMember);
-        }
+        }*/
 
-        club.setMembers(clubMembers);
+        club.setMembers(club.getMembers().stream().filter(member -> member.getEmail().equals(memberEmail)).collect(Collectors.toList()));
 
         clubStore.update(club);
     }
 
     public void remove(TravelClub club, String memberEmail){
-        List<ClubMember> clubMembers = new ArrayList<>();
+        /*List<ClubMember> clubMembers = new ArrayList<>();
 
         for(ClubMember clubMember : club.getMembers()){
             if(!clubMember.getEmail().equals(memberEmail)){
@@ -77,7 +80,8 @@ public class MemberHelper {
             }
         }
 
-        club.setMembers(clubMembers);
+        club.setMembers(clubMembers);*/
+        club.setMembers(club.getMembers().stream().filter(member -> !(member.getEmail().equals(memberEmail))).collect(Collectors.toList()));
 
         clubStore.update(club);
     }

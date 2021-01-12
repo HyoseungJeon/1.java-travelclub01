@@ -29,16 +29,17 @@ public class Narrator {
     }
 
     public void say (String message){
-
+        printOut(appendTabs().append(formatMessage(message)));
     }
     public void sayln ( String message){
-
+        printOut(appendTabs().append(formatMessage(message)).append("\n"));
     }
 
     public void sayNewLine(){
 
         System.out.print("\n");
     }
+
 
     private void printOut(StringBuffer message){
         if(!silenMode){
@@ -56,6 +57,8 @@ public class Narrator {
             return message;
         }
     }
+
+
 
     private StringBuffer appendTabs(){
         StringBuffer buffer = new StringBuffer();

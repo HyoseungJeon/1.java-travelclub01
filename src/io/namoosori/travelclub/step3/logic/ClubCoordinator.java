@@ -30,12 +30,13 @@ public class ClubCoordinator {
     }
 
     public boolean existByname(String name){
-        for( TravelClub club : clubList){
+        /*for( TravelClub club : clubList){
             if (club.getName().equals(name)){
                 return true;
             }
         }
-        return false;
+        return false;*/
+        return clubList.stream().anyMatch(club -> club.getName().equals(name));
     }
 
     public String register(TravelClub newClub){
@@ -50,12 +51,13 @@ public class ClubCoordinator {
     }
 
     public TravelClub find(String name){
-        for(TravelClub club :  clubList){
+        /*for(TravelClub club :  clubList){
             if(club.getName().equals(name)){
                 return club;
             }
         }
-        return null;
+        return null;*/
+        return clubList.stream().filter(club -> club.getName().equals(name)).findFirst().orElse(null);
     }
 
     public List<TravelClub> findAll(){
