@@ -66,15 +66,20 @@ public class ClubCoordinator {
 
         TravelClub club = clubStore.retrieve(clubName);
 
-        for(String name : nameValueMap.keySet()){
+        /*for(String name : nameValueMap.keySet()){
             String value = nameValueMap.get(name);
 
             switch (name){
                 case "intro":
                     club.setIntro(value);
                     break;
+                case "name":
+                    club.setName(value);
+                    break;
             }
-        }
+        }*/
+
+        club.setIntro(nameValueMap.get(nameValueMap.keySet().stream().filter(name -> nameValueMap.get(name).equals("intro")).findFirst().get()));
 
         clubStore.update(club);
     }
