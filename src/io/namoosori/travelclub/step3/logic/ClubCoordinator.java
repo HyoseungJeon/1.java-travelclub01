@@ -90,7 +90,7 @@ public class ClubCoordinator {
             throw new NoSuchClubException("No such club with name " + clubname);
         }
 
-        for( String name : nameValueMap.keySet()){
+        /*for( String name : nameValueMap.keySet()){
             String value = nameValueMap.get(name);
 
             switch (name){
@@ -98,7 +98,14 @@ public class ClubCoordinator {
                     club.setIntro(value);
                     break;
             }
-        }
+        }*/
+        nameValueMap.entrySet().stream().forEach(map -> {
+            switch (map.getKey()){
+                case("intro"):
+                    club.setIntro(map.getValue());
+                    break;
+            }
+        });
     }
 
     public void remove(TravelClub club){

@@ -79,7 +79,14 @@ public class ClubCoordinator {
             }
         }*/
 
-        club.setIntro(nameValueMap.get(nameValueMap.keySet().stream().filter(name -> nameValueMap.get(name).equals("intro")).findFirst().get()));
+        //club.setIntro(nameValueMap.get(nameValueMap.keySet().stream().filter(name -> nameValueMap.get(name).equals("intro")).findFirst().get()));
+        nameValueMap.entrySet().stream().forEach(map -> {
+            switch (map.getKey()){
+                case("intro"):
+                    club.setIntro(map.getValue());
+                    break;
+            }
+        });
 
         clubStore.update(club);
     }
